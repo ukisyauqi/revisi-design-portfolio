@@ -344,6 +344,51 @@ class Carousel {
 document.querySelectorAll('[data-carousel]').forEach((root) => new Carousel(root));
 
 /* --------------------------------------------------------------------------
+   Rotating hero roles
+   -------------------------------------------------------------------------- */
+const roleCycler = document.querySelector('[data-role-cycler]');
+
+if (roleCycler) {
+  const roles = Array.from(roleCycler.querySelectorAll('.hero-role'));
+
+  if (roles.length > 1 && !reduceMotion) {
+    let index = Math.max(0, roles.findIndex((role) => role.classList.contains('is-active')));
+    let timer = null;
+
+    const advance = () => {
+      const current = roles[index];
+      index = (index + 1) % roles.length;
+      const next = roles[index];
+
+      current.classList.remove('is-active');
+      current.classList.add('is-past');
+      next.classList.remove('is-past');
+      next.classList.add('is-active');
+
+      window.setTimeout(() => current.classList.remove('is-past'), 700);
+    };
+
+    const start = () => {
+      if (timer) return;
+      timer = window.setInterval(advance, 2600);
+    };
+
+    const stop = () => {
+      if (!timer) return;
+      window.clearInterval(timer);
+      timer = null;
+    };
+
+    start();
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
    Lightbox triggers
    -------------------------------------------------------------------------- */
 document.querySelectorAll('[data-lightbox]').forEach((trigger) => {
