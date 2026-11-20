@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+
+# Figma source files (>100MB, ditolak GitHub)
+*.fig
