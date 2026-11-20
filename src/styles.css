@@ -724,8 +724,11 @@ main {
 
 .portrait-circle {
   position: absolute;
-  inset: 5% 1% 10% 13%;
-  border-radius: 48% 48% 44% 44%;
+  left: 13%;
+  top: 11.4%;
+  width: 86%;
+  aspect-ratio: 1;
+  border-radius: 50%;
   background:
     radial-gradient(110% 90% at 30% 18%, #d9b5f6 0%, #b07aee 28%, #814bd9 58%, #4d2e9b 100%);
   box-shadow: 0 40px 140px rgba(123, 97, 255, 0.3), inset 0 0 80px rgba(255, 255, 255, 0.07);
@@ -745,9 +748,12 @@ main {
 .portrait-photo {
   position: absolute;
   right: -3%;
-  bottom: -2%;
+  bottom: 10%;
   width: 97%;
   filter: drop-shadow(0 32px 44px rgba(0, 0, 0, 0.38));
+  /* Clip mengikuti geometri .portrait-circle supaya foto tetap di dalam lingkaran. */
+  -webkit-clip-path: ellipse(44.4% 52.5% at 51.5% 38.3%);
+  clip-path: ellipse(44.4% 52.5% at 51.5% 38.3%);
 }
 
 .portrait-crystal {
